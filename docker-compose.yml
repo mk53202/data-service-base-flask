@@ -1,0 +1,30 @@
+version: '3'
+services:
+  s41-lora-geodata-service:
+    container_name: s41-lora-geodata-service
+    build: .
+    image: s41-lora-geodata-service:latest
+    ports:
+      - 9000:8080
+    volumes:
+      - nginx:/etc/nginx
+
+  db:
+    container_name: db_postgres
+    image: postgres:latest
+    restart: always
+    ports:
+      - 9100:5432
+    environment:
+      POSTGRES_PASSWORD: example
+
+  nginx:
+    container_name: nginx
+    image: nginx:1.18.0-alpine
+    ports:
+      - 80:80
+    volumes:
+      - nginx:/etc/nginx
+
+volumes:
+  nginx:
