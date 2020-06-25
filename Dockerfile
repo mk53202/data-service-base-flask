@@ -3,6 +3,7 @@ FROM python:3.7-alpine
 ADD requirements.txt .
 
 RUN apk add python3-dev build-base linux-headers pcre-dev && pip install --no-cache-dir -r requirements.txt
+RUN apk add postgresql-dev
 
 # Adding application files
 ADD . /webapp
