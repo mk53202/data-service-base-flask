@@ -7,7 +7,7 @@ class Config(object):
     CONFIG_PATH = os.path.join(NGINX_PATH, 'conf.d')
 
     @staticmethod
-    def init_app(app):
+    def init_app(app):  # do any data materialization here.
         pass
 
 class DevConfig(Config):

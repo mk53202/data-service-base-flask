@@ -2,10 +2,8 @@ import datetime
 import io
 import os
 import flask
-import pg_simple
 
 from app.api import api
-# from app.data import data
 
 @api.route('/',  methods=['GET'])
 def home():

@@ -2,9 +2,13 @@ FROM python:3.7-alpine
 
 ADD requirements.txt .
 
-RUN apk add python3-dev build-base linux-headers pcre-dev && pip install --no-cache-dir -r requirements.txt
-RUN apk add postgresql-dev
+RUN apk add python3-dev build-base linux-headers pcre-dev postgresql-dev git
 
+# RUN apk add postgresql-dev
+RUN pip install --no-cache-dir -r requirements.txt
+RUN git clone https://github.com/masroore/pg_simple.git # this is a workaround to force install pg_simple
+RUN python3 pg_simple/setup.py install  # this is a workaround to force install pg_simple
+RUN pip install --no-cache-dir pg_simple    # this is a workaround to force install pg_simple
 # Adding application files
 ADD . /webapp
 
