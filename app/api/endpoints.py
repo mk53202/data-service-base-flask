@@ -2,7 +2,7 @@ import datetime
 import io
 import os
 import flask
-import pg_simple
+# import pg_simple
 
 from app.api import api
 # from app.data import data
@@ -11,11 +11,18 @@ from app.api import api
 def home():
     return "API default"
 
-@api.route("/days/<int:days>")
+@api.route("/days/<int:days>", methods=['GET'])
 def routeDays(days):
     query = str(days) + " days"
     # myData = jsonLoraMap(query)
     return query
+
+
+# @api.route("/device/<int:device_id>", methods=['PUT'])
+# def routeDays(days):
+#     query = str(days) + " days"
+#     # myData = jsonLoraMap(query)
+#     return query
 
 # @app.route("/weeks/<int:weeks>")
 # def routeWeeks(weeks):

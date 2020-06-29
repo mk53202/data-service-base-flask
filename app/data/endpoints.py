@@ -2,6 +2,8 @@ import datetime
 import io
 import os
 import flask
+import psycopg2
+from psycopg2.extras import RealDictCursor
 
 from app.api import api
 
