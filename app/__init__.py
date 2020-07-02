@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 # moment = Moment()   # Extends the jinja templates with localized date/time functionality
 
+
 db = SQLAlchemy()
 
 def create_app(config_name):
