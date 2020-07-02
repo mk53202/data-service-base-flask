@@ -2,20 +2,28 @@ version: '3'
 
 services:
   web:
-    container_name: s41-web-service-flask-postgres
-    image: s41-web-service-flask-postgres:latest
     restart: always
-    build: .
-    # links:
-    #   - postgres:postgres
+    build: ./web
+    expose:
+      - "8000"
     links:
-      - postgres
-    ports:
-      - 9000:8080
+      - postgres:postgres
+    volumes:
+      - web-data:/usr/src/app/static
     env_file: 
       - .env
+    command: /usr/local/bin/gunicorn -w 2 -b :8000 app:app
+
+  nginx:
+    restart: always
+    build: ./nginx
+    ports:
+      - "80:80"
     volumes:
-      - web-data:/etc/nginx
+      - .:/www/static
+      - web-data:/usr/src/app/static
+    links:
+      - web:web
 
   data:
     image: postgres:latest
@@ -24,25 +32,12 @@ services:
     command: "true"
 
   postgres:
-    container_name: db_postgres
     restart: always
     image: postgres:latest
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-
-  nginx:
-    restart: always
-    image: nginx:1.18.0-alpine
-    # build: ./nginx
-    ports:
-      - "80:80"
-    volumes:
-      - web-data:/usr/src/app/static
-      - web-data:/etc/nginx
-    links:
-      - web:web
 
 volumes:
   db-data:
