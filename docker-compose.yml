@@ -2,14 +2,18 @@ version: '3'
 
 services:
   web:
-    container_name: s41-lora-geodata-service
-    image: s41-lora-geodata-service:latest
+    container_name: s41-web-service-flask-postgres
+    image: s41-web-service-flask-postgres:latest
     restart: always
     build: .
+    # links:
+    #   - postgres:postgres
     links:
-      - postgres:postgres
+      - postgres
     ports:
       - 9000:8080
+    env_file: 
+      - .env
     volumes:
       - web-data:/etc/nginx
 
@@ -20,6 +24,7 @@ services:
     command: "true"
 
   postgres:
+    container_name: db_postgres
     restart: always
     image: postgres:latest
     volumes:
