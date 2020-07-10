@@ -12,11 +12,6 @@ db = SQLAlchemy(app)
 
 from models import *
 
-
-# # Register the api endpoints
-# from app.api import api as api_blueprint
-# app.register_blueprint(api_blueprint, url_prefix='/api')
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -27,10 +22,13 @@ def index():
     posts = Post.query.order_by(Post.date_posted.desc()).all()
     return render_template('index.html', posts=posts)
 
-
 @app.route('/test', methods=['GET'])
 def test():
     return "Test API"
+
+@app.route('/api/delete', methods=['GET'])
+def deleteItem():
+    return "Delete Item API"
 
 if __name__ == '__main__':
     app.run()

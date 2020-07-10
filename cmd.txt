@@ -1,6 +1,5 @@
 # Run
 FLASK_APP=web/app.py FLASK_ENV=development DEBUG=True flask run
 
-# Step debug
-docker-compose run -p 8000:8000 svc1 python3 -m pdb app.pye
+FLASK_APP=web/app.py FLASK_ENV=development DEBUG=True DB_SERVICE=127.0.0.1 flask run
 
