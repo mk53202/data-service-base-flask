@@ -22,11 +22,11 @@ def index():
     posts = Post.query.order_by(Post.date_posted.desc()).all()
     return render_template('index.html', posts=posts)
 
-@app.route('/test', methods=['GET'])
+@app.route('/api/test', methods=['GET'])
 def test():
     return "Test API"
 
-@app.route('/api/delete', methods=['GET'])
+@app.route('/api/delete', methods=['POST'])
 def deleteItem():
     return "Delete Item API"
 
