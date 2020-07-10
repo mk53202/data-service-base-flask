@@ -1,11 +1,9 @@
 # config.py
 
-
 import os
 
-
 class BaseConfig(object):
-    SECRET_KEY = os.environ['SECRET_KEY']
+    SECRET_KEY = os.urandom(64).hex()
     DEBUG = os.environ['DEBUG']
     DB_NAME = os.environ['DB_NAME']
     DB_USER = os.environ['DB_USER']
